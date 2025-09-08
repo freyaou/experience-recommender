@@ -1,0 +1,4 @@
+id,name,city,categories,price,rating,outdoor,url
+p1,Good Coffee,Los Angeles,"coffee;bakery",2,4.5,True,https://example.com/good
+p2,Courtyard Cafe,Santa Monica,"coffee;patio",2,4.3,True,https://example.com/courtyard
+p3,Quiet Nook,Los Angeles,"coffee",1,4.1,False,https://example.com/nook
