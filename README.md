@@ -21,10 +21,10 @@ B --> C[Candidate Ranker]
 C --> D[Explanation Generator]
 D --> E[Streamlit App UI]
 ```
-
+---
 ### 1 Intent Parsing
 
-Extracts city, category, budget, vibe, and distance radius using an LLM system prompt (prompts/system_intent.txt).
+Extracts city, category, budget, vibe, and distance radius using an LLM system prompt (`prompts/system_intent.txt`).
 
 Example:
 
@@ -37,11 +37,11 @@ Example:
   "max_miles": 5
 }
 ```
-
+---
 ### 2 Candidate Ranking
 
-Fetches nearby venues from a DuckDB snapshot (data/snapshots/snapshot.duckdb) and scores each candidate using mistral:instruct based on the parsed intent.
-Prompt: prompts/system_rank.txt
+Fetches nearby venues from a DuckDB snapshot (`data/snapshots/snapshot.duckdb`) and scores each candidate using `mistral:instruct` based on the parsed intent.
+Prompt: `prompts/system_rank.txt`
 
 Example output:
 ```json
@@ -52,7 +52,7 @@ Example output:
 ```
 ### 3 Natural-Language Explanation
 
-Each ranked result is passed through a lightweight explanation model (prompts/system_explain.txt) to generate one short, friendly sentence — factual, warm, and natural.
+Each ranked result is passed through a lightweight explanation model (`prompts/system_explain.txt`) to generate one short, friendly sentence — factual, warm, and natural.
 
 Example:
 
@@ -67,7 +67,7 @@ core/orchestrator.py	Runs full pipeline end-to-end
 app/Home.py	Streamlit front-end interface
 prompts/	Modular system prompts for each model stage
 data/snapshots/	DuckDB snapshot of candidate places
-
+---
 ## 💻 Run Locally
 1. Clone the repo
 ```bash
@@ -89,7 +89,7 @@ streamlit run app/Home.py
 ```
 
 Then open the link printed in your terminal (usually http://localhost:8501).
-
+---
 ## 🧠 Model Setup (Ollama)
 
 This app uses Ollama locally for LLM inference.
@@ -103,6 +103,27 @@ Then pull the required model:
 
 ollama pull mistral:instruct
 
+---
+## 🚀 Currently Supports
+
+✅ Natural language query parsing (city, vibe, budget, distance)
+✅ Offline DuckDB snapshot for local venue data
+✅ Local Mistral model inference via Ollama
+✅ Ranking and reasoning through LLM-generated JSON
+✅ Streamlit web UI with interactive search
+✅ Fully modular structure (`core/`, `connectors/`, `storage/`)
+
+---
+
+🔮 Upcoming Features
+
+- Integrate Yelp API for live restaurant & venue data
+- Add memory context for recurring user preferences
+- Enable multi-turn queries (“find something cheaper nearby”)
+- Add filter chips and map visualization in the UI
+- Support real-time ranking explanations and confidence scores
+- Experiment with RAG-enhanced ranking and lightweight embeddings
+
 ## 🧪 Example Query
 
 Input:
@@ -113,6 +134,7 @@ Output:
 
 🏆 Top Picks
 
+```csharp
 ☕ Courtyard Cafe
 ⭐ Score: 0.95  
 The Courtyard Cafe in Santa Monica is perfect for your quiet coffee break with its outdoor setting!
@@ -124,13 +146,4 @@ Good Coffee in LA has a tranquil vibe and outdoor seating, though it’s not in 
 ☕ Quiet Nook
 ⭐ Score: 0.35  
 Despite being located in Los Angeles, Quiet Nook’s quiet and cozy atmosphere might just make it worth the short drive to Santa Monica for a coffee break.
-
-## 🧭 Roadmap
-
- Add memory-based context (e.g., recurring user preferences)
-
- Extend dataset with Yelp API for live data
-
- Support multi-turn queries (“somewhere cheaper but still quiet”)
-
- Evaluate RAG vs fine-tuned LLM ranking layers
+```
