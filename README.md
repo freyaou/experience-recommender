@@ -58,6 +58,8 @@ Example:
 
 “The Courtyard Cafe in Santa Monica is perfect for your quiet coffee break with its outdoor setting!”
 
+---
+
 ## 🧩 System Architecture
 
 Below is the current modular design of the Experience Recommender MVP:
@@ -65,29 +67,29 @@ Below is the current modular design of the Experience Recommender MVP:
 ```mermaid
 flowchart TB
     subgraph User_Interface[🎨 Streamlit Frontend]
-        H[app/Home.py]
+        H["app/Home.py\n(Streamlit UI)"]
     end
 
     subgraph Core_Logic[🧠 Core Logic]
-        A[core/intent.py<br>Intent Parser]
-        B[core/rank.py<br>Candidate Ranker]
-        C[core/explain.py<br>Explanation Generator]
-        D[core/orchestrator.py<br>Pipeline Orchestrator]
+        A["core/intent.py\nIntent Parser"]
+        B["core/rank.py\nCandidate Ranker"]
+        C["core/explain.py\nExplanation Generator"]
+        D["core/orchestrator.py\nPipeline Orchestrator"]
     end
 
     subgraph Storage[🗄️ Storage Layer]
-        E[storage/duckdb.py<br>Local DuckDB Access]
-        F[storage/vectordb.py<br>Vector Database (optional)]
+        E["storage/duckdb.py\nLocal DuckDB Access"]
+        F["storage/vectordb.py\nVector Database (optional)"]
     end
 
     subgraph Connectors[🔌 External Connectors]
-        G[connectors/yelp.py]
-        I[connectors/ticketmaster.py]
+        G["connectors/yelp.py"]
+        I["connectors/ticketmaster.py"]
     end
 
     subgraph Data_Assets[💾 Data Assets]
-        J[data/snapshots/snapshot.duckdb]
-        K[data/seeds/places.csv]
+        J["data/snapshots/snapshot.duckdb"]
+        K["data/seeds/places.csv"]
     end
 
     H --> A
@@ -100,8 +102,10 @@ flowchart TB
     F --> J
     D --> G
     D --> I
+
 ```
 ---
+
 ## 💻 Run Locally
 1. Clone the repo
 ```bash
