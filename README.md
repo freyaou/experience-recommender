@@ -35,6 +35,7 @@ Example:
   "vibe": ["quiet", "outdoor"],
   "max_miles": 5
 }
+```
 
 2️⃣ Candidate Ranking
 
@@ -47,7 +48,7 @@ Example output:
   {"name": "Courtyard Cafe", "score": 0.95, "reason": "Located in Santa Monica and offers outdoor seating."},
   {"name": "Good Coffee", "score": 0.70, "reason": "Quiet vibe and patio seating but outside Santa Monica."}
 ]
-
+```
 3️⃣ Natural-Language Explanation
 
 Each ranked result is passed through a lightweight explanation model (prompts/system_explain.txt) to generate one short, friendly sentence — factual, warm, and natural.
@@ -71,7 +72,7 @@ data/snapshots/	DuckDB snapshot of candidate places
 ```bash
 git clone https://github.com/<your-handle>/experience-recommender.git
 cd experience-recommender
-
+```
 2. Install dependencies
 
 You can use either conda or pip:
@@ -80,11 +81,11 @@ You can use either conda or pip:
 conda create -n recommender python=3.12
 conda activate recommender
 pip install -r requirements.txt
-
+```
 3. Launch the app
 ```bash
 streamlit run app/Home.py
-
+```
 
 Then open the link printed in your terminal (usually http://localhost:8501).
 
