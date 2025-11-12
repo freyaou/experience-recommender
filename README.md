@@ -58,15 +58,49 @@ Example:
 
 “The Courtyard Cafe in Santa Monica is perfect for your quiet coffee break with its outdoor setting!”
 
-## 🧩 System Design
-Component	Description
-core/intent.py	Parses query into structured JSON
-core/rank.py	Ranks venues based on intent match
-core/explain.py	Generates short human-readable reasoning
-core/orchestrator.py	Runs full pipeline end-to-end
-app/Home.py	Streamlit front-end interface
-prompts/	Modular system prompts for each model stage
-data/snapshots/	DuckDB snapshot of candidate places
+## 🧩 System Architecture
+
+Below is the current modular design of the Experience Recommender MVP:
+
+```mermaid
+flowchart TB
+    subgraph User_Interface[🎨 Streamlit Frontend]
+        H[app/Home.py]
+    end
+
+    subgraph Core_Logic[🧠 Core Logic]
+        A[core/intent.py<br>Intent Parser]
+        B[core/rank.py<br>Candidate Ranker]
+        C[core/explain.py<br>Explanation Generator]
+        D[core/orchestrator.py<br>Pipeline Orchestrator]
+    end
+
+    subgraph Storage[🗄️ Storage Layer]
+        E[storage/duckdb.py<br>Local DuckDB Access]
+        F[storage/vectordb.py<br>Vector Database (optional)]
+    end
+
+    subgraph Connectors[🔌 External Connectors]
+        G[connectors/yelp.py]
+        I[connectors/ticketmaster.py]
+    end
+
+    subgraph Data_Assets[💾 Data Assets]
+        J[data/snapshots/snapshot.duckdb]
+        K[data/seeds/places.csv]
+    end
+
+    H --> A
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+    D --> F
+    E --> J
+    F --> J
+    D --> G
+    D --> I
+```
 ---
 ## 💻 Run Locally
 1. Clone the repo
@@ -95,23 +129,23 @@ Then open the link printed in your terminal (usually http://localhost:8501).
 This app uses Ollama locally for LLM inference.
 
 Make sure it’s running:
-
+```bash
 ollama serve
-
+```
 
 Then pull the required model:
-
+```bash
 ollama pull mistral:instruct
-
+```
 ---
 ## 🚀 Currently Supports
 
-✅ Natural language query parsing (city, vibe, budget, distance)
-✅ Offline DuckDB snapshot for local venue data
-✅ Local Mistral model inference via Ollama
-✅ Ranking and reasoning through LLM-generated JSON
-✅ Streamlit web UI with interactive search
-✅ Fully modular structure (`core/`, `connectors/`, `storage/`)
+- Natural language query parsing (city, vibe, budget, distance)
+- Offline DuckDB snapshot for local venue data
+- Local Mistral model inference via Ollama
+- Ranking and reasoning through LLM-generated JSON
+- Streamlit web UI with interactive search
+- Fully modular structure (`core/`, `connectors/`, `storage/`)
 
 ---
 
