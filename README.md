@@ -109,7 +109,7 @@ flowchart TB
 ## 💻 Run Locally
 1. Clone the repo
 ```bash
-git clone https://github.com/<your-handle>/experience-recommender.git
+git clone https://github.com/freyaou/experience-recommender
 cd experience-recommender
 ```
 2. Install dependencies
@@ -125,8 +125,8 @@ pip install -r requirements.txt
 ```bash
 streamlit run app/Home.py
 ```
-
 Then open the link printed in your terminal (usually http://localhost:8501).
+
 ---
 ## 🧠 Model Setup (Ollama)
 
@@ -166,7 +166,7 @@ ollama pull mistral:instruct
 
 Input:
 
-quiet coffee with patio in Santa Monica
+> `quiet coffee with patio in Santa Monica`
 
 Output:
 
