@@ -20,6 +20,7 @@ A[User Query] --> B[Intent Parser]
 B --> C[Candidate Ranker]
 C --> D[Explanation Generator]
 D --> E[Streamlit App UI]
+```
 
 1️⃣ Intent Parsing
 
