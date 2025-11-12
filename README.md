@@ -22,7 +22,7 @@ C --> D[Explanation Generator]
 D --> E[Streamlit App UI]
 ```
 
-1️⃣ Intent Parsing
+### 1 Intent Parsing
 
 Extracts city, category, budget, vibe, and distance radius using an LLM system prompt (prompts/system_intent.txt).
 
@@ -38,7 +38,7 @@ Example:
 }
 ```
 
-2️⃣ Candidate Ranking
+### 2 Candidate Ranking
 
 Fetches nearby venues from a DuckDB snapshot (data/snapshots/snapshot.duckdb) and scores each candidate using mistral:instruct based on the parsed intent.
 Prompt: prompts/system_rank.txt
@@ -50,7 +50,7 @@ Example output:
   {"name": "Good Coffee", "score": 0.70, "reason": "Quiet vibe and patio seating but outside Santa Monica."}
 ]
 ```
-3️⃣ Natural-Language Explanation
+### 3 Natural-Language Explanation
 
 Each ranked result is passed through a lightweight explanation model (prompts/system_explain.txt) to generate one short, friendly sentence — factual, warm, and natural.
 
@@ -58,7 +58,7 @@ Example:
 
 “The Courtyard Cafe in Santa Monica is perfect for your quiet coffee break with its outdoor setting!”
 
-🧩 System Design
+## 🧩 System Design
 Component	Description
 core/intent.py	Parses query into structured JSON
 core/rank.py	Ranks venues based on intent match
@@ -68,7 +68,7 @@ app/Home.py	Streamlit front-end interface
 prompts/	Modular system prompts for each model stage
 data/snapshots/	DuckDB snapshot of candidate places
 
-💻 Run Locally
+## 💻 Run Locally
 1. Clone the repo
 ```bash
 git clone https://github.com/<your-handle>/experience-recommender.git
@@ -90,10 +90,9 @@ streamlit run app/Home.py
 
 Then open the link printed in your terminal (usually http://localhost:8501).
 
-🧠 Model Setup (Ollama)
+## 🧠 Model Setup (Ollama)
 
-This app uses Ollama
- locally for LLM inference.
+This app uses Ollama locally for LLM inference.
 
 Make sure it’s running:
 
@@ -104,7 +103,7 @@ Then pull the required model:
 
 ollama pull mistral:instruct
 
-🧪 Example Query
+## 🧪 Example Query
 
 Input:
 
@@ -126,7 +125,7 @@ Good Coffee in LA has a tranquil vibe and outdoor seating, though it’s not in 
 ⭐ Score: 0.35  
 Despite being located in Los Angeles, Quiet Nook’s quiet and cozy atmosphere might just make it worth the short drive to Santa Monica for a coffee break.
 
-🧭 Roadmap
+## 🧭 Roadmap
 
  Add memory-based context (e.g., recurring user preferences)
 
